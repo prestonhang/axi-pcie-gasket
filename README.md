@@ -1,8 +1,9 @@
 # axi4-lite
-ECE 571: Final Project
+Final Project for ECE 571: Intro To SystemVerilog
 
 
-Gally Huang
-Nathan Habtemariam
-Tyler Henderson
-Preston Hang
+# Team
+- Gally Huang
+- Nathan Habtemariam
+- Tyler Henderson
+- Preston Hang
