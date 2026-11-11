@@ -1,9 +1,11 @@
+import gasket_pkg::*;
+
 interface axi_if;
 
 // read address channel
 	logic [DWORD_WIDTH-1:0] ARADDR;
 	logic [4-1:0] ARCACHE;
-	logic [3-1:0] ARPRO;
+	logic [3-1:0] ARPROT;
 	logic ARVALID;
 	logic ARREADY;
 
@@ -33,7 +35,7 @@ interface axi_if;
 						input ARREADY,
 						input RDATA, RRESP, RVALID,
 						output RREADY,
-						output AWADDR, AWCACHE, AWPROT, AWVALID,'
+						output AWADDR, AWCACHE, AWPROT, AWVALID,
 						input AWREADY,
 						output WDATA, WSTRB,
 						input BRESP, BVALID,
@@ -44,12 +46,11 @@ interface axi_if;
 						output ARREADY,
 						output RDATA, RRESP, RVALID,
 						input RREADY,
-						input AWADDR, AWCACHE, AWPROT, AWVALID,'
+						input AWADDR, AWCACHE, AWPROT, AWVALID,
 						output AWREADY,
 						input WDATA, WSTRB,
 						output BRESP, BVALID,
 						input BREADY
 						);
-
 
 endinterface
