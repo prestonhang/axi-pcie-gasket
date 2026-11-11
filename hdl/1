@@ -1,0 +1,33 @@
+interface axi_if;
+
+// read address channel
+	logic [DWORD_WIDTH-1:0] ARADDR;
+	logic [4-1:0] ARCACHE;
+	logic [3-1:0] ARPRO;
+	logic ARVALID;
+	logic ARREADY;
+
+// read data channel
+	logic [DWORD_WIDTH-1:0] RDATA;
+	logic RRESP;
+	logic RVALID;
+	logic RREADY;
+
+// write address channel
+	logic [DWORD_WIDTH-1:0] AWADDR;
+	logic [4-1:0] AWCACHE;
+	logic [3-1:0] AWPROT;
+	logic AWVALID;
+	logic AWREADY;
+
+// write data channel
+	logic [DWORD_WIDTH-1:0] WDATA;
+	logic [4-1:0] WSTRB;
+
+// write response channel
+	logic BRESP;
+	logic BVALID;
+	logic BREADY;
+
+
+endinterface

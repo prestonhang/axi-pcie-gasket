@@ -1,21 +1,55 @@
 interface axi_if;
 
-	// read address + control
-        logic [DWORD_WIDTH-1:0] rd_addr_ctrl; // CHANGE WIDTH
-        // read data channel    
-        logic [DWORD_WIDTH-1:0] rd_data_ch;
+// read address channel
+	logic [DWORD_WIDTH-1:0] ARADDR;
+	logic [4-1:0] ARCACHE;
+	logic [3-1:0] ARPRO;
+	logic ARVALID;
+	logic ARREADY;
 
-        // write address + contro
-        logic [DWORD_WIDTH-1:0] wr_addr_ctrl; // CHANGE WIDTH
-        // write data channel
-        logic [DWORD_WIDTH-1:0] wr_data_ch
-        // write response channnel
-        logic [DWORD_WIDTH-1:0] wr_resp_ch; // CHANGE WIDTH
+// read data channel
+	logic [DWORD_WIDTH-1:0] RDATA;
+	logic RRESP;
+	logic RVALID;
+	logic RREADY;
 
-	modport axi_port (input rd_addr_ctrl, wr_addr_ctrl, wr_data_ch,
-				output rd_data_ch, wr_resp_ch);
+// write address channel
+	logic [DWORD_WIDTH-1:0] AWADDR;
+	logic [4-1:0] AWCACHE;
+	logic [3-1:0] AWPROT;
+	logic AWVALID;
+	logic AWREADY;
 
-	modport tb_port (input rd_data_ch, wr_resp_ch,
-				output rd_addr_ctrl, wr_addr_ctrl, wr_data_ch);
+// write data channel
+	logic [DWORD_WIDTH-1:0] WDATA;
+	logic [4-1:0] WSTRB;
+
+// write response channel
+	logic BRESP;
+	logic BVALID;
+	logic BREADY;
+
+	modport axi_master(	output ARADDR, ARCACHE, ARPROT, ARVALID, 
+						input ARREADY,
+						input RDATA, RRESP, RVALID,
+						output RREADY,
+						output AWADDR, AWCACHE, AWPROT, AWVALID,'
+						input AWREADY,
+						output WDATA, WSTRB,
+						input BRESP, BVALID,
+						output BREADY
+						);
+
+	modport axi_slave(	input ARADDR, ARCACHE, ARPROT, ARVALID, 
+						output ARREADY,
+						output RDATA, RRESP, RVALID,
+						input RREADY,
+						input AWADDR, AWCACHE, AWPROT, AWVALID,'
+						output AWREADY,
+						input WDATA, WSTRB,
+						output BRESP, BVALID,
+						input BREADY
+						);
+
 
 endinterface
