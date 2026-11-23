@@ -1,6 +1,6 @@
 import gasket_pkg::*;
 
-interface axi_if;
+interface axi_if(input logic clk, input logic rst_n);
 
 // read address channel
 	logic [DWORD_WIDTH-1:0] ARADDR;
@@ -31,7 +31,8 @@ interface axi_if;
 	logic BVALID;
 	logic BREADY;
 
-	modport axi_master(	output ARADDR, ARCACHE, ARPROT, ARVALID, 
+	modport axi_master(	input clk, rst_n,
+						output ARADDR, ARCACHE, ARPROT, ARVALID, 
 						input ARREADY,
 						input RDATA, RRESP, RVALID,
 						output RREADY,
@@ -42,7 +43,8 @@ interface axi_if;
 						output BREADY
 						);
 
-	modport axi_slave(	input ARADDR, ARCACHE, ARPROT, ARVALID, 
+	modport axi_slave(	input clk, rst_n,
+						input ARADDR, ARCACHE, ARPROT, ARVALID, 
 						output ARREADY,
 						output RDATA, RRESP, RVALID,
 						input RREADY,
