@@ -36,7 +36,7 @@ interface axi_if(input logic clk, input logic rst_n);
 					input ARREADY,
 					input RDATA, RRESP, RVALID,
 					output RREADY,
-					output AWADDR, AWCACHE, AWPROT, AWVALID,'
+					output AWADDR, AWCACHE, AWPROT, AWVALID,
 					input AWREADY,
 					output WDATA, WSTRB,
 					input BRESP, BVALID,
