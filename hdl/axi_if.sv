@@ -29,27 +29,27 @@ interface axi_if;
 	logic BVALID;
 	logic BREADY;
 
-	modport axi_master(	output ARADDR, ARCACHE, ARPROT, ARVALID, 
-						input ARREADY,
-						input RDATA, RRESP, RVALID,
-						output RREADY,
-						output AWADDR, AWCACHE, AWPROT, AWVALID,'
-						input AWREADY,
-						output WDATA, WSTRB,
-						input BRESP, BVALID,
-						output BREADY
-						);
+	modport master(	output ARADDR, ARCACHE, ARPROT, ARVALID, 
+					input ARREADY,
+					input RDATA, RRESP, RVALID,
+					output RREADY,
+					output AWADDR, AWCACHE, AWPROT, AWVALID,'
+					input AWREADY,
+					output WDATA, WSTRB,
+					input BRESP, BVALID,
+					output BREADY
+					);
 
-	modport axi_slave(	input ARADDR, ARCACHE, ARPROT, ARVALID, 
-						output ARREADY,
-						output RDATA, RRESP, RVALID,
-						input RREADY,
-						input AWADDR, AWCACHE, AWPROT, AWVALID,'
-						output AWREADY,
-						input WDATA, WSTRB,
-						output BRESP, BVALID,
-						input BREADY
-						);
+	modport slave(	input ARADDR, ARCACHE, ARPROT, ARVALID, 
+					output ARREADY,
+					output RDATA, RRESP, RVALID,
+					input RREADY,
+					input AWADDR, AWCACHE, AWPROT, AWVALID,
+					output AWREADY,
+					input WDATA, WSTRB,
+					output BRESP, BVALID,
+					input BREADY
+					);
 
 
 endinterface

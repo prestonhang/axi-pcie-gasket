@@ -11,12 +11,11 @@ module top (
 );
 
 
-// axi to pcie module 
-
-// pcie to sram
-
-// sram module
+// axi master/tb
 
 
+// 
 
-endmodule
+
+
+endmodule: top
