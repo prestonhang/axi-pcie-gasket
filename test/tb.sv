@@ -44,7 +44,9 @@ valid and ready are 1 by default - can leave the last two fields blank when call
 
 */
 	task automatic axi_read_ack();
-		do(@(posedge clk)) while (bus.ARREADY ~= 1'b1);
+		while (bus.ARREADY ~= 1'b1) begin
+			@(posedge clk);
+		end
 		bus.ARADDR <= '0; 
 		bus.ARVALID <= '0;
 	endtask: axi_read_ack
@@ -53,22 +55,46 @@ valid and ready are 1 by default - can leave the last two fields blank when call
 
 */
 	task automatic axi_read_data(output data_t read_data);
-		do(@(posedge clk)) while (bus.RVALID ~= 1'b1);
+		while (bus.RVALID ~= 1'b1) begin
+			@(posedge clk);
+		end
 		read_data <= bus.RDATA
 	endtask: axi_read_data
 
 /* TASK DESCRIPTION
 
 */
-	task automatic axi_write_req();
-
+	task automatic axi_write_req(input addr_t addr, input data_t data, input bit addr_valid = 1, input bit data_valid = 1, input bit resp_ready = 1);
+		bus.AWADDR <= addr;
+		bus.AWVALID <= addr_valid;
+		bus.WDATA <= data;
+		bus.WVALID <= data_valid;
+		bus.BREADY <= resp_ready;
 	endtask axi_write_req
 
 /* TASK DESCRIPTION
 
 */
 	task automatic axi_write_ack();
+		// might change this to fork/join to assess handshakes in parallel
 
+		// OPTION 1: combined while loop
+		while(~(AWREADY == 1'b1 && WREADY == 1'b1)) begin
+			@(posedge clk);
+		end
+
+
+		// OPTION 2: fork/join
+		fork
+			begin 
+				while(bus.AWREADY ~= 1'b1) @(posedge clk);
+				bus.AWVALID <= 0;
+			end
+			begin
+				while(bus.WREADY ~= 1'b1) @(posedge clk);
+				bus.WVALID <= 0;
+			end
+		join
 	endtask: axi_write_ack
 
 /* TASK DESCRIPTION
