@@ -31,7 +31,8 @@ interface axi_if(input logic clk, input logic rst_n);
 	logic BVALID;
 	logic BREADY;
 
-	modport master(	output ARADDR, ARCACHE, ARPROT, ARVALID, 
+	modport master(	input clk, rst_n,
+					output ARADDR, ARCACHE, ARPROT, ARVALID, 
 					input ARREADY,
 					input RDATA, RRESP, RVALID,
 					output RREADY,
