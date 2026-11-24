@@ -1,6 +1,6 @@
 package gasket_pkg;
 
-    parameter DWORD_WIDTH = 32
+    parameter DWORD_WIDTH = 32;
 
 // Format Field (DW0 [30:29])
 typedef enum logic [1:0] {
@@ -62,10 +62,10 @@ typedef union packed {
 
 } tlp_packet_dw1_u;
 
-typedef struct packed { 
+typedef union packed {
     logic [31:0] data;
 
-    struct packed { 
+    struct packed {
         logic [29:0] address;
         logic [1:0] reserved;
     } mem_req;
@@ -93,11 +93,11 @@ typedef union packed {
         tlp_packet_dw1_u dw1;
         tlp_packet_dw2_u dw2;
         tlp_packet_DW3   dw3;
-    } payload
+    } payload;
 
     logic [3:0][31:0] tlp_packet;
 
-} tlp_packet_128b_u
+} tlp_packet_128b_u;
 
 // axi package components
     typedef logic [DWORD_WIDTH-1:0] data_t;

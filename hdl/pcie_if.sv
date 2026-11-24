@@ -44,5 +44,25 @@ modport TX (
     output tx_last
 );
 
+// SRAM endpoint side of the link (mirror of TX + RX above):
+//   requests from the gasket arrive on tx_*  -> inputs here
+//   completions to the gasket go out on rx_* -> outputs here
+modport SRAM_EP (
+    input  clk,
+    input  rst_n,
+
+    // requests in (MWr / MRd)
+    input  tx_data,
+    output tx_ready,
+    input  tx_valid,
+    input  tx_last,
+
+    // completions out (CplD / Cpl)
+    output rx_data,
+    input  rx_ready,
+    output rx_valid,
+    output rx_last
+);
+
 
 endinterface
