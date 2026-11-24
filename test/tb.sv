@@ -57,7 +57,26 @@ valid and ready are 1 by default - can leave the last two fields blank when call
 		read_data <= bus.RDATA
 	endtask: axi_read_data
 
-	task automatic axi_write 
+/* TASK DESCRIPTION
+
+*/
+	task automatic axi_write_req();
+
+	endtask axi_write_req
+
+/* TASK DESCRIPTION
+
+*/
+	task automatic axi_write_ack();
+
+	endtask: axi_write_ack
+
+/* TASK DESCRIPTION
+
+*/
+	task automatic axi_write_data();
+
+	endtask: axi_write_data
 
 
 // testbench stimulus	
