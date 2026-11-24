@@ -99,6 +99,9 @@ typedef union packed {
 
 } tlp_packet_128b_u
 
+// axi package components
+    typedef logic [DWORD_WIDTH-1:0] data_t;
+    typedef logic [DWORD_WIDTH-1:0] addr_t;
 
 
 

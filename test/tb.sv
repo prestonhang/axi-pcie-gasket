@@ -25,6 +25,40 @@ module gasket_tb (axi_if.master bus);
 		#CLK_PERIOD; // extra clock cycle for buffer
 	endtask: rst_sequence
 
+//
+	task automatic axi_write();
+	
+	endtask: axi_write
+
+/*
+this task drives the read address on the axi bus to the slave, as well as driving read address valid, and read ready
+valid and ready are 1 by default - can leave the last two fields blank when calling this task
+*/
+	task automatic axi_read_req(input addr_t read_addr, input bit valid = 1, input bit ready = 1);
+		bus.ARADDR <= read_addr; 
+		bus.ARVALID <= valid;
+		bus.RREADY <= ready;
+	endtask: axi_read
+
+/* TASK DESCRIPTION
+
+*/
+	task automatic axi_read_ack();
+		do(@(posedge clk)) while (bus.ARREADY ~= 1'b1);
+		bus.ARADDR <= '0; 
+		bus.ARVALID <= '0;
+	endtask: axi_read_ack
+
+/* TASK DESCRIPTION
+
+*/
+	task automatic axi_read_data(output data_t read_data);
+		do(@(posedge clk)) while (bus.RVALID ~= 1'b1);
+		read_data <= bus.RDATA
+	endtask: axi_read_data
+
+	task automatic axi_write 
+
 
 // testbench stimulus	
 	initial begin
